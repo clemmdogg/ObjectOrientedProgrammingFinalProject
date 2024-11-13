@@ -9,6 +9,11 @@ namespace ObjectOrientedProgrammingFinalProject;
 
 internal static class StaticMethods
 {
+    /*
+     /// 
+     /// METODES I WOULD LIKE TO BREAK THE CONSOLE-PROGRAM.CS CONVENTION WITH!!!
+     ///
+
     public static enmMainMenuChoice GetMainMenuChoice()
     {
         while (true)
@@ -146,6 +151,7 @@ internal static class StaticMethods
             }
         }
     }
+    
     public static void NoMatchFound()
     {
         Console.BackgroundColor = ConsoleColor.Red;
@@ -160,4 +166,5 @@ internal static class StaticMethods
         Console.WriteLine(text);
         Console.ForegroundColor = ConsoleColor.Gray;
     }
+    */
 }

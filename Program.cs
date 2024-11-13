@@ -1,6 +1,7 @@
 ﻿global using ObjectOrientedProgrammingFinalProject;
 using ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
 using System.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 
 Student simonHeilbuth = new Student("Simon", "Heilbuth", new DateTime(1985, 4, 16));
@@ -25,7 +26,7 @@ Student troelsLundPoulsen = new Student("Troels Lund", "Poulsen", new DateTime(1
 
 Teacher nielsOlesen = new Teacher("Niels", "Olesen", new DateTime(1971, 1, 2));
 Teacher henrikVincentsPoulsen = new Teacher("Henrik Vincent", "Poulsen", new DateTime(1978, 1, 2));
-Teacher michaelGilbertHansen = new Teacher("Michael Gilber", "Hansen", new DateTime(1980, 9, 2));
+Teacher michaelGilbertHansen = new Teacher("Michael Gilbert", "Hansen", new DateTime(1980, 9, 2));
 Teacher nicolaiBoFredsoe = new Teacher("Nicolai Bo", "Fredsøe", new DateTime(1992, 10, 20));
 
 List<Student> students = new List<Student> 
@@ -80,19 +81,191 @@ List<Subject> subjects = new List<Subject>
 bool userWantsToQuit = false;
 while (!userWantsToQuit)
 {
-    enmMainMenuChoice mainMenuChoice = StaticMethods.GetMainMenuChoice();
-
-    if(mainMenuChoice == enmMainMenuChoice.SearchForSubject)
+    enmMainMenuChoice mainMenuChoice = enmMainMenuChoice.QuitProgram;
+    bool isInputCorrectInMainMenu = false;
+    while (!isInputCorrectInMainMenu)
     {
-        StaticMethods.PrintSubject(StaticMethods.GetSubjectChoice(subjects), true);
+        Console.WriteLine("Vælg:");
+        Console.WriteLine("1) Søg på fag");
+        Console.WriteLine("2) Søg på lærer");
+        Console.WriteLine("3) Søg på elev");
+        Console.WriteLine("4) Afslut programmet");
+        Console.Write("Vælg et tal for en af de ovenstående muligheder: ");
+        string userInput = Console.ReadLine();
+        if (userInput == "1")
+        {
+            mainMenuChoice = enmMainMenuChoice.SearchForSubject;
+            isInputCorrectInMainMenu = true;
+        }
+        else if (userInput == "2")
+        {
+            mainMenuChoice = enmMainMenuChoice.SearchForTeacher;
+            isInputCorrectInMainMenu = true;
+        }
+        else if (userInput == "3")
+        {
+            mainMenuChoice = enmMainMenuChoice.SearchForStudent;
+            isInputCorrectInMainMenu = true;
+        }
+        else if (userInput == "4")
+        {
+            mainMenuChoice = enmMainMenuChoice.QuitProgram;
+            isInputCorrectInMainMenu = true;
+        }
+        else
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine("Ingen match fundet!!");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+    }
+
+    if (mainMenuChoice == enmMainMenuChoice.SearchForSubject)
+    {
+        subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
+        Subject usersSubjectChoice = new Subject();
+        bool isInputCorrectInSubjectMenu = false;
+
+        while (!isInputCorrectInSubjectMenu)
+        {
+            Console.Clear();
+            int subjectIndex = 0;
+            foreach (Subject subject in subjects)
+            {
+                Console.WriteLine($"{subjectIndex + 1}) {subject.Name}");
+                subjectIndex++;
+            }
+            Console.Write("Vælg et tal for en af de ovenstående fag: ");
+            if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= subjects.Count)
+            {
+                usersSubjectChoice = subjects[input - 1];
+                isInputCorrectInSubjectMenu = true;
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ingen match fundet!!");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ReadKey();
+                Console.Clear();
+            }
+        }
+        Console.WriteLine($"\tFag: {usersSubjectChoice.Name}");
+        Console.WriteLine($"\tLærer: {usersSubjectChoice.Teacher.FirstName} {usersSubjectChoice.Teacher.LastName}");
+        Console.WriteLine($"\tAntal elever ialt: {usersSubjectChoice.Students.Count}");
+        foreach (Student student in usersSubjectChoice.Students)
+        {
+            DateCalculator dateCalculator = new DateCalculator(student.Birthday);
+            if (dateCalculator.IsDateMoreThan20YearsAgo())
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\t\t{student.FirstName} {student.LastName}");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            else { Console.WriteLine($"\t\t{student.FirstName} {student.LastName}"); }
+        }
     }
     else if (mainMenuChoice == enmMainMenuChoice.SearchForTeacher)
     {
-        StaticMethods.PrintTeacher(StaticMethods.GetTeacherChoice(teachers), subjects);
+        teachers = teachers.OrderBy(teachers => teachers.FirstName).ToList();
+        Teacher usersTeacherChoice = new Teacher("", "", new DateTime());
+        bool isInputCorrectInTeacherMenu = false;
+
+        while (!isInputCorrectInTeacherMenu)
+        {
+            Console.Clear();
+            int teacherIndex = 0;
+            foreach (Teacher teacher in teachers)
+            {
+                Console.WriteLine($"{teacherIndex + 1}) {teacher.FirstName} {teacher.LastName}");
+                teacherIndex++;
+            }
+            Console.Write("Vælg et tal for en af de ovenstående fag: ");
+            if (int.TryParse(Console.ReadLine(), out int input) && input > 0 && input <= teachers.Count)
+            {
+                usersTeacherChoice = teachers[input - 1];
+                isInputCorrectInTeacherMenu = true;
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ingen match fundet!!");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ReadKey();
+                Console.Clear();
+            }
+        }
+        subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
+        List<Subject> filteredSubject =
+            subjects.Where(
+                (subject => subject.Teacher.FirstName == usersTeacherChoice.FirstName &&
+                subject.Teacher.LastName == usersTeacherChoice.LastName)
+                ).ToList();
+        foreach (Subject subject in filteredSubject)
+        {
+            Console.WriteLine($"\tFag: {subject.Name}");
+            Console.WriteLine($"\tAntal elever ialt: {subject.Students.Count}");
+            foreach (Student student in subject.Students)
+            {
+                DateCalculator dateCalculator = new DateCalculator(student.Birthday);
+                if (dateCalculator.IsDateMoreThan20YearsAgo())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"\t\t{student.FirstName} {student.LastName}");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else { Console.WriteLine($"\t\t{student.FirstName} {student.LastName}"); }
+            }
+        }
     }
     else if (mainMenuChoice == enmMainMenuChoice.SearchForStudent)
     {
-        StaticMethods.PrintStudent(StaticMethods.GetStudentChoice(students), subjects);
+        Student usersStudentChoice = new Student("", "", new DateTime());
+        bool isInputCorrectInStudentMenu = false;
+        while (!isInputCorrectInStudentMenu)
+        {
+            Console.Clear();
+            Console.Write("Indtast navnet på den elev, du vil søge på eller [A] for afslut: ");
+            string userInput = Console.ReadLine().ToLower();
+            if (userInput == "a")
+            {
+                usersStudentChoice = new Student("Michael", "Laudrup", new DateTime(1962, 5, 5));
+            }
+            foreach (Student student in students)
+            {
+                if ($"{student.FirstName.ToLower()} {student.LastName.ToLower()}" == userInput)
+                {
+                    usersStudentChoice = student;
+                    isInputCorrectInStudentMenu = true;
+                }
+            }
+            if (!isInputCorrectInStudentMenu)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ingen match fundet!!");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ReadKey();
+                Console.Clear();
+            }
+        }
+        subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
+        if (usersStudentChoice.FirstName == "Michael" && usersStudentChoice.LastName == "Laudrup")
+        {
+            Console.Clear();
+            return;
+        }
+        foreach (Subject subject in subjects)
+        {
+            if (subject.Students.Contains(usersStudentChoice))
+            {
+                Console.WriteLine($"\tFag: {subject.Name}");
+                Console.WriteLine($"\tLærerens navn: {subject.Teacher.FirstName} {subject.Teacher.LastName}");
+                Console.WriteLine();
+            }
+        }
     }
     else if (mainMenuChoice == enmMainMenuChoice.QuitProgram)
     {
