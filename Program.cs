@@ -232,7 +232,8 @@ while (!userWantsToQuit)
             string userInput = Console.ReadLine().ToLower();
             if (userInput == "a")
             {
-                usersStudentChoice = new Student("Michael", "Laudrup", new DateTime(1962, 5, 5));
+                Console.Clear();
+                isInputCorrectInStudentMenu = true;
             }
             foreach (Student student in students)
             {
@@ -251,19 +252,17 @@ while (!userWantsToQuit)
                 Console.Clear();
             }
         }
-        subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
-        if (usersStudentChoice.FirstName == "Michael" && usersStudentChoice.LastName == "Laudrup")
+        if (!(usersStudentChoice.FirstName.Length == 0 && usersStudentChoice.LastName.Length == 0))
         {
-            Console.Clear();
-            return;
-        }
-        foreach (Subject subject in subjects)
-        {
-            if (subject.Students.Contains(usersStudentChoice))
+            subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
+            foreach (Subject subject in subjects)
             {
-                Console.WriteLine($"\tFag: {subject.Name}");
-                Console.WriteLine($"\tLærerens navn: {subject.Teacher.FirstName} {subject.Teacher.LastName}");
-                Console.WriteLine();
+                if (subject.Students.Contains(usersStudentChoice))
+                {
+                    Console.WriteLine($"\tFag: {subject.Name}");
+                    Console.WriteLine($"\tLærerens navn: {subject.Teacher.FirstName} {subject.Teacher.LastName}");
+                    Console.WriteLine();
+                }
             }
         }
     }
