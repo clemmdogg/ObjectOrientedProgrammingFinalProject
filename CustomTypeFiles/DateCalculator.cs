@@ -9,8 +9,13 @@ namespace ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
 
 public struct DateCalculator
 {
-    public bool IsDateLessThan20YearsAgo(DateTime date)
+    public DateTime Date {  get; set; }
+    public DateCalculator(DateTime date)
     {
-        return (date.AddYears(20) >= DateTime.Now); ;
+        Date = date;
+    }
+    public bool IsDateLessThan20YearsAgo()
+    {
+        return (Date.AddYears(20) >= DateTime.Now); ;
     }
 }
