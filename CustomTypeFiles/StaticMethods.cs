@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,21 +23,20 @@ internal static class StaticMethods
         while (true)
         {
             Console.WriteLine("Vælg:");
-            Console.WriteLine("1) Søg på fag");
-            Console.WriteLine("2) Søg på lærer");
-            Console.WriteLine("3) Søg på elev");
-            Console.WriteLine("4) Afslut programmet");
-            Console.Write("Vælg et tal for en af de ovenstående muligheder: ");
-            string userInput = Console.ReadLine();
-            if (userInput == "1") { return enmMainMenuChoice.SearchForSubject; }
-            else if (userInput == "2") { return enmMainMenuChoice.SearchForTeacher; }
-            else if (userInput == "3") { return enmMainMenuChoice.SearchForStudent; }
-            else if (userInput == "4") { return enmMainMenuChoice.QuitProgram; }
-            else
+            foreach (enmMainMenuChoice option in Enum.GetValues(typeof(enmMainMenuChoice)))
             {
-                NoMatchFound();
+                Console.WriteLine(GetEnumDescription(option));
             }
+            Console.Write("Vælg et tal for en af de ovenstående muligheder: ");
+            if (int.TryParse(Console.ReadLine(), out int userIntInput))
+            {
+                if (Enum.IsDefined(typeof(enmMainMenuChoice), userIntInput))
+                {
+                    return (enmMainMenuChoice)userIntInput;
+                }
 
+            } 
+            NoMatchFound();
         }
     }
     /// <summary>
@@ -212,5 +213,11 @@ internal static class StaticMethods
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine(text);
         Console.ForegroundColor = ConsoleColor.Gray;
+    }
+    public static string GetEnumDescription(Enum value)
+    {
+        var field = value.GetType().GetField(value.ToString());
+        var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+        return attribute == null ? value.ToString() : attribute.Description;
     }
 }
