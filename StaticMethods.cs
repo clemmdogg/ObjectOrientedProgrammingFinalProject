@@ -9,7 +9,6 @@ namespace ObjectOrientedProgrammingFinalProject;
 
 internal static class StaticMethods
 {
-    /*
      /// 
      /// METODES I WOULD LIKE TO BREAK THE CONSOLE-PROGRAM.CS CONVENTION WITH!!!
      ///
@@ -166,5 +165,4 @@ internal static class StaticMethods
         Console.WriteLine(text);
         Console.ForegroundColor = ConsoleColor.Gray;
     }
-    */
 }

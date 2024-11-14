@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
 
-internal class Student : Person
+internal class Student : Person, ITecDepartment
 {
-    public Student(string firstName, string lastName, DateTime birthday) : base(firstName, lastName, birthday) { }
+    public enmTecDepartments TecDepartment { get; set; }
+    public Student(string firstName, String lastName, DateTime birthday) : base(firstName, lastName, birthday) { }
+    public void SetDepartment(enmTecDepartments tecDeparment)
+    {
+        TecDepartment = tecDeparment;
+    }
 }

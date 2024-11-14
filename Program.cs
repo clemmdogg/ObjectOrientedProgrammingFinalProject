@@ -2,8 +2,7 @@
 using ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
 using System.Data;
 using static System.Net.Mime.MediaTypeNames;
-
-
+// Initilizing all students
 Student simonHeilbuth = new Student("Simon", "Heilbuth", new DateTime(1985, 4, 16));
 Student andreasLorentzen = new Student("Andreas", "Lorentsen", new DateTime(2007, 3, 3));
 Student casperClemmensen = new Student("Casper", "Clemmensen", new DateTime(1986, 8, 15));
@@ -24,11 +23,13 @@ Student metteFrederiksen = new Student("Mette", "Frederiksen", new DateTime(1976
 Student larslokkeRasmussen = new Student("Lars Løkke", "Rasmussen", new DateTime(1964, 3, 2));
 Student troelsLundPoulsen = new Student("Troels Lund", "Poulsen", new DateTime(1970, 8, 3));
 
+// Initilizing all teachers
 Teacher nielsOlesen = new Teacher("Niels", "Olesen", new DateTime(1971, 1, 2));
 Teacher henrikVincentsPoulsen = new Teacher("Henrik Vincent", "Poulsen", new DateTime(1978, 1, 2));
 Teacher michaelGilbertHansen = new Teacher("Michael Gilbert", "Hansen", new DateTime(1980, 9, 2));
 Teacher nicolaiBoFredsoe = new Teacher("Nicolai Bo", "Fredsøe", new DateTime(1992, 10, 20));
 
+// Defining a list with all students
 List<Student> students = new List<Student> 
 {
     simonHeilbuth, andreasLorentzen, casperClemmensen, danielBjerrreJensen, hjalteMoesgaardLeth, 
@@ -37,11 +38,13 @@ List<Student> students = new List<Student>
     tobiasSvarterHammarkvist, yosefKasas, metteFrederiksen, larslokkeRasmussen, troelsLundPoulsen
 };
 
+// Defining a list with all teachers
 List<Teacher> teachers = new List<Teacher>
 {
     nielsOlesen, henrikVincentsPoulsen, michaelGilbertHansen, nicolaiBoFredsoe
 };
 
+// Initilizing all subjects
 List<Subject> subjects = new List<Subject>
 {
     new Subject{Name = "Grundæggende Programmering 2", Teacher = henrikVincentsPoulsen, Students = new List<Student>(){
@@ -78,6 +81,15 @@ List<Subject> subjects = new List<Subject>
         metteFrederiksen, larslokkeRasmussen, troelsLundPoulsen
         }, StartingDate = new DateTime(2025, 1, 13) },
 };
+
+
+
+
+///
+/// RUNNING PROGRAM WITHOUT STATIC METHODS
+///
+
+// Main menu
 bool userWantsToQuit = false;
 while (!userWantsToQuit)
 {
@@ -122,9 +134,10 @@ while (!userWantsToQuit)
         }
 
     }
-
+    // Choices of main menu
     if (mainMenuChoice == enmMainMenuChoice.SearchForSubject)
     {
+        // Gets the correct subject
         subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
         Subject usersSubjectChoice = new Subject();
         bool isInputCorrectInSubjectMenu = false;
@@ -153,13 +166,15 @@ while (!userWantsToQuit)
                 Console.Clear();
             }
         }
+
+        // Prints the subject
         Console.WriteLine($"\tFag: {usersSubjectChoice.Name}");
         Console.WriteLine($"\tLærer: {usersSubjectChoice.Teacher.FirstName} {usersSubjectChoice.Teacher.LastName}");
         Console.WriteLine($"\tAntal elever ialt: {usersSubjectChoice.Students.Count}");
         foreach (Student student in usersSubjectChoice.Students)
         {
             DateCalculator dateCalculator = new DateCalculator(student.Birthday);
-            if (dateCalculator.IsDateMoreThan20YearsAgo())
+            if (dateCalculator.IsDateLessThan20YearsAgo())
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"\t\t{student.FirstName} {student.LastName}");
@@ -168,8 +183,10 @@ while (!userWantsToQuit)
             else { Console.WriteLine($"\t\t{student.FirstName} {student.LastName}"); }
         }
     }
+
     else if (mainMenuChoice == enmMainMenuChoice.SearchForTeacher)
     {
+        // Gets the correct teacher
         teachers = teachers.OrderBy(teachers => teachers.FirstName).ToList();
         Teacher usersTeacherChoice = new Teacher("", "", new DateTime());
         bool isInputCorrectInTeacherMenu = false;
@@ -198,6 +215,8 @@ while (!userWantsToQuit)
                 Console.Clear();
             }
         }
+
+        // Prints the correct teacher
         subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
         List<Subject> filteredSubject =
             subjects.Where(
@@ -211,7 +230,7 @@ while (!userWantsToQuit)
             foreach (Student student in subject.Students)
             {
                 DateCalculator dateCalculator = new DateCalculator(student.Birthday);
-                if (dateCalculator.IsDateMoreThan20YearsAgo())
+                if (dateCalculator.IsDateLessThan20YearsAgo())
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"\t\t{student.FirstName} {student.LastName}");
@@ -223,6 +242,7 @@ while (!userWantsToQuit)
     }
     else if (mainMenuChoice == enmMainMenuChoice.SearchForStudent)
     {
+        // Gets the correct student
         Student usersStudentChoice = new Student("", "", new DateTime());
         bool isInputCorrectInStudentMenu = false;
         while (!isInputCorrectInStudentMenu)
@@ -230,6 +250,15 @@ while (!userWantsToQuit)
             Console.Clear();
             Console.Write("Indtast navnet på den elev, du vil søge på eller [A] for afslut: ");
             string userInput = Console.ReadLine().ToLower();
+            if (userInput == null || userInput.Length == 0)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ingen match fundet!!");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ReadKey();
+                Console.Clear();
+                continue;
+            }
             if (userInput == "a")
             {
                 Console.Clear();
@@ -252,6 +281,8 @@ while (!userWantsToQuit)
                 Console.Clear();
             }
         }
+
+        // Prints the student
         if (!(usersStudentChoice.FirstName.Length == 0 && usersStudentChoice.LastName.Length == 0))
         {
             subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
@@ -268,6 +299,7 @@ while (!userWantsToQuit)
     }
     else if (mainMenuChoice == enmMainMenuChoice.QuitProgram)
     {
+        // Quitting the program 
         userWantsToQuit = true;
         Console.WriteLine("Farvel og tak fordi du brugte programmet");
         Console.ReadKey();

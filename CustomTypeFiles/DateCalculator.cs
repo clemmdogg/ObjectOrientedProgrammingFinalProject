@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
 
-public struct DateCalculator
+public struct DateCalculator : IBoolDateCalculations
 {
     public DateTime Date;
 
@@ -14,8 +14,9 @@ public struct DateCalculator
     {
         Date = date;
     }
-    public bool IsDateMoreThan20YearsAgo()
+    public bool IsDateLessThan20YearsAgo()
     {
-        return (Date.AddYears(20) >= DateTime.Now);
+        IBoolDateCalculations myInterface = this;
+        return myInterface.IIsDateLessThan20YearsAgo(Date);
     }
 }
