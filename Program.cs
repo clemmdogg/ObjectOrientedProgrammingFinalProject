@@ -3,31 +3,31 @@ using ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
 using System.Data;
 using static System.Net.Mime.MediaTypeNames;
 // Initilizing all students
-Student simonHeilbuth = new Student("Simon", "Heilbuth", new DateTime(1985, 4, 16));
-Student andreasLorentzen = new Student("Andreas", "Lorentsen", new DateTime(2007, 3, 3));
-Student casperClemmensen = new Student("Casper", "Clemmensen", new DateTime(1986, 8, 15));
-Student danielBjerrreJensen = new Student("Daniel Bjerre", "Jensen", new DateTime(2000, 4, 4));
-Student hjalteMoesgaardLeth = new Student("Hjalte Moesgaard", "Leth", new DateTime(2000, 5, 5));
-Student johanMilterJakobsen = new Student("Johan Milter", "Jakobsen", new DateTime(2005, 7, 4));
-Student louisThomasDaoPetersen = new Student("Louis Thomas Dao", "Petersen", new DateTime(2006, 4, 1));
-Student lukasHaugstadFrederiksen = new Student("Lukas Haugstad", "Frederiksen", new DateTime(2007, 5, 4));
-Student marcusWahlstrom = new Student("Marcus", "Wahlstrøm", new DateTime(2000, 8, 4));
-Student marcusSlotRohr = new Student("Marcus Slot", "Rohr", new DateTime(1996, 9, 9));
-Student mathiasAltenburg = new Student("Mathias", "Altenburg", new DateTime(1997, 2, 2));
-Student patrickGutierrezFogelstrom = new Student("Patrick Gutierrez", "Fogelstrøm", new DateTime(2003, 4, 4));
-Student ramtinAkbari = new Student("Ramtin", "Akbari", new DateTime(1997, 2, 2));
-Student sebastianTolbolNielsen = new Student("Sebastian Tølbøl", "Nielsen", new DateTime(1995, 1, 1));
-Student tobiasSvarterHammarkvist = new Student("Tobias Svarter", "Hammarkvist", new DateTime(2007, 12, 13));
-Student yosefKasas = new Student("Yosef", "Kasas", new DateTime(2000, 2, 2));
-Student metteFrederiksen = new Student("Mette", "Frederiksen", new DateTime(1976, 4, 5));
-Student larslokkeRasmussen = new Student("Lars Løkke", "Rasmussen", new DateTime(1964, 3, 2));
-Student troelsLundPoulsen = new Student("Troels Lund", "Poulsen", new DateTime(1970, 8, 3));
+Student simonHeilbuth = new ("Simon", "Heilbuth", new DateTime(1985, 4, 16));
+Student andreasLorentzen = new ("Andreas", "Lorentsen", new DateTime(2007, 3, 3));
+Student casperClemmensen = new ("Casper", "Clemmensen", new DateTime(1986, 8, 15));
+Student danielBjerrreJensen = new ("Daniel Bjerre", "Jensen", new DateTime(2000, 4, 4));
+Student hjalteMoesgaardLeth = new ("Hjalte Moesgaard", "Leth", new DateTime(2000, 5, 5));
+Student johanMilterJakobsen = new ("Johan Milter", "Jakobsen", new DateTime(2005, 7, 4));
+Student louisThomasDaoPetersen = new ("Louis Thomas Dao", "Petersen", new DateTime(2006, 4, 1));
+Student lukasHaugstadFrederiksen = new ("Lukas Haugstad", "Frederiksen", new DateTime(2007, 5, 4));
+Student marcusWahlstrom = new ("Marcus", "Wahlstrøm", new DateTime(2000, 8, 4));
+Student marcusSlotRohr = new ("Marcus Slot", "Rohr", new DateTime(1996, 9, 9));
+Student mathiasAltenburg = new ("Mathias", "Altenburg", new DateTime(1997, 2, 2));
+Student patrickGutierrezFogelstrom = new ("Patrick Gutierrez", "Fogelstrøm", new DateTime(2003, 4, 4));
+Student ramtinAkbari = new ("Ramtin", "Akbari", new DateTime(1997, 2, 2));
+Student sebastianTolbolNielsen = new ("Sebastian Tølbøl", "Nielsen", new DateTime(1995, 1, 1));
+Student tobiasSvarterHammarkvist = new ("Tobias Svarter", "Hammarkvist", new DateTime(2007, 12, 13));
+Student yosefKasas = new ("Yosef", "Kasas", new DateTime(2000, 2, 2));
+Student metteFrederiksen = new ("Mette", "Frederiksen", new DateTime(1976, 4, 5));
+Student larslokkeRasmussen = new ("Lars Løkke", "Rasmussen", new DateTime(1964, 3, 2));
+Student troelsLundPoulsen = new ("Troels Lund", "Poulsen", new DateTime(1970, 8, 3));
 
 // Initilizing all teachers
-Teacher nielsOlesen = new Teacher("Niels", "Olesen", new DateTime(1971, 1, 2));
-Teacher henrikVincentsPoulsen = new Teacher("Henrik Vincent", "Poulsen", new DateTime(1978, 1, 2));
-Teacher michaelGilbertHansen = new Teacher("Michael Gilbert", "Hansen", new DateTime(1980, 9, 2));
-Teacher nicolaiBoFredsoe = new Teacher("Nicolai Bo", "Fredsøe", new DateTime(1992, 10, 20));
+Teacher nielsOlesen = new ("Niels", "Olesen", new DateTime(1971, 1, 2));
+Teacher henrikVincentsPoulsen = new ("Henrik Vincent", "Poulsen", new DateTime(1978, 1, 2));
+Teacher michaelGilbertHansen = new ("Michael Gilbert", "Hansen", new DateTime(1980, 9, 2));
+Teacher nicolaiBoFredsoe = new ("Nicolai Bo", "Fredsøe", new DateTime(1992, 10, 20));
 
 // Defining a list with all students
 List<Student> students = new List<Student> 
