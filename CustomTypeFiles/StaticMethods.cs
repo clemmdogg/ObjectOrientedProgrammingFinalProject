@@ -34,7 +34,6 @@ internal static class StaticMethods
                 {
                     return (enmMainMenuChoice)userIntInput;
                 }
-
             } 
             NoMatchFound();
         }

@@ -86,29 +86,26 @@ bool isUserWantingToQuit = false;
 while (!isUserWantingToQuit)
 {
     // Main menu
-    enmMainMenuChoice mainMenuChoice = StaticMethods.GetMainMenuChoice();
-    // Choices of main menu
-    if (mainMenuChoice == enmMainMenuChoice.SearchForSubject)
+    switch (StaticMethods.GetMainMenuChoice())
     {
-        StaticMethods.PrintSubject(StaticMethods.GetSubjectChoice(subjects), true);
-    }
-    else if (mainMenuChoice == enmMainMenuChoice.SearchForTeacher)
-    {
-        StaticMethods.PrintTeacher(StaticMethods.GetTeacherChoice(teachers), subjects);
-    }
-    else if (mainMenuChoice == enmMainMenuChoice.SearchForStudent)
-    {
-        StaticMethods.PrintStudent(StaticMethods.GetStudentChoice(students), subjects);
-    }
-    else if (mainMenuChoice == enmMainMenuChoice.QuitProgram)
-    {
-        isUserWantingToQuit = true;
-        Console.WriteLine("Farvel og tak fordi du brugte programmet");
-        Console.ReadKey();
-    }
-    else
-    {
-        StaticMethods.NoMatchFound();
+        // Sub menus
+        case enmMainMenuChoice.SearchForSubject:
+            StaticMethods.PrintSubject(StaticMethods.GetSubjectChoice(subjects), true);
+            break;
+        case enmMainMenuChoice.SearchForTeacher:
+            StaticMethods.PrintTeacher(StaticMethods.GetTeacherChoice(teachers), subjects);
+            break;
+        case enmMainMenuChoice.SearchForStudent:
+            StaticMethods.PrintStudent(StaticMethods.GetStudentChoice(students), subjects);
+            break;
+        case enmMainMenuChoice.QuitProgram:
+            isUserWantingToQuit = true;
+            Console.WriteLine("Farvel og tak fordi du brugte programmet");
+            Console.ReadKey();
+            break;
+        default:
+            StaticMethods.NoMatchFound();
+            break;
     }
 }
 
