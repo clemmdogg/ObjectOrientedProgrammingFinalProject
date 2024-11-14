@@ -16,7 +16,6 @@ internal interface IDemographics
         {
             age--;
         }
-
         return age;
     }
 }

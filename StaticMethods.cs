@@ -9,10 +9,14 @@ namespace ObjectOrientedProgrammingFinalProject;
 
 internal static class StaticMethods
 {
-     /// 
-     /// METODES I WOULD LIKE TO BREAK THE CONSOLE-PROGRAM.CS CONVENTION WITH!!!
-     ///
+    /// 
+    /// METODES I WOULD LIKE TO BREAK THE CONSOLE-PROGRAM.CS CONVENTION WITH!!!
+    ///
 
+    /// <summary>
+    /// Creates the main menu and returns the choice
+    /// </summary>
+    /// <returns>Enum choice</returns>
     public static enmMainMenuChoice GetMainMenuChoice()
     {
         while (true)
@@ -35,6 +39,11 @@ internal static class StaticMethods
 
         }
     }
+    /// <summary>
+    /// Creates a menu from list of subjects, that  makes the user choose a subject and returns that subject.
+    /// </summary>
+    /// <param name="subjects">List of subjects the user can pick from</param>
+    /// <returns>The userpicked subject</returns>
     public static Subject GetSubjectChoice(List<Subject> subjects)
     {
         subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
@@ -58,6 +67,11 @@ internal static class StaticMethods
             }
         }
     }
+    /// <summary>
+    /// Creates a menu from list of teachers, that  makes the user choose a subject and returns that teacher.
+    /// </summary>
+    /// <param name="teachers">List of teachers the user can pick from</param>
+    /// <returns>The userpicked teacher</returns>
     public static Teacher GetTeacherChoice(List<Teacher> teachers)
     {
         teachers = teachers.OrderBy(teachers => teachers.FirstName).ToList();
@@ -81,7 +95,12 @@ internal static class StaticMethods
             }
         }
     }
-    public static Student GetStudentChoice(List<Student> students)
+    /// <summary>
+    /// The user can input the name from a student to get that student obejct.
+    /// </summary>
+    /// <param name="students">List of students the user can pick from</param>
+    /// <returns>The userpicked student or a string if user wants to quit</returns>
+    public static dynamic GetStudentChoice(List<Student> students)
     {
         while (true)
         {
@@ -90,7 +109,7 @@ internal static class StaticMethods
             string userInput = Console.ReadLine().ToLower();
             if (userInput == "a")
             {
-                return new Student("Michael", "Laudrup", new DateTime(1962, 5, 5));
+                return "User don't want to search!";
             }
             foreach (Student student in students)
             {
@@ -102,6 +121,11 @@ internal static class StaticMethods
             NoMatchFound();
         }
     }
+    /// <summary>
+    /// Prints out the subject object according to the exercise.
+    /// </summary>
+    /// <param name="subject">The subject object that is going to be printed</param>
+    /// <param name="withTeacherName">Is the teacher name also going to be printed?</param>
     public static void PrintSubject(Subject subject, bool withTeacherName)
     {
         Console.WriteLine($"\tFag: {subject.Name}");
@@ -112,13 +136,19 @@ internal static class StaticMethods
         Console.WriteLine($"\tAntal elever ialt: {subject.Students.Count}");
         foreach (Student student in subject.Students)
         {
-            if (student.Birthday.AddYears(20) > DateTime.Now)
+            DateCalculator dateCalculator = new DateCalculator(student.Birthday);
+            if (dateCalculator.IsDateLessThan20YearsAgo())
             {
                 WriteLineGreen($"\t\t{student.FirstName} {student.LastName}");
             }
             else { Console.WriteLine($"\t\t{student.FirstName} {student.LastName}"); }
         }
     }
+    /// <summary>
+    /// Prints out the teacher object according to the exercise.
+    /// </summary>
+    /// <param name="teacher">The teacher object that is going to be printed</param>
+    /// <param name="subjects">The subjects you want to search through with teacher object</param>
     public static void PrintTeacher(Teacher teacher, List<Subject> subjects)
     {
         subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
@@ -132,25 +162,36 @@ internal static class StaticMethods
             PrintSubject(subject, false);
         }
     }
+    /// <summary>
+    /// Prints out the student object according to the exercise.
+    /// </summary>
+    /// <param name="student">The student object that is going to be printed</param>
+    /// <param name="subjects">The subjects you want to search through with student object</param>
     public static void PrintStudent(Student student, List<Subject> subjects)
     {
-        subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
-        if (student.FirstName == "Michael" && student.LastName == "Laudrup")
-        {
-            Console.Clear();
-            return;
-        }
         foreach (Subject subject in subjects)
         {
             if (subject.Students.Contains(student))
             {
                 Console.WriteLine($"\tFag: {subject.Name}");
-                Console.WriteLine($"\tLærerens navn: {subject.Teacher}");
+                Console.WriteLine($"\tLærerens navn: {subject.Teacher.FirstName} {subject.Teacher.LastName}");
                 Console.WriteLine();
             }
         }
     }
-    
+    /// <summary>
+    /// Quits the searching for a student menu
+    /// </summary>
+    /// <param name="quittingString">The string that gets to this method</param>
+    /// <param name="subjects">Only a parameter used if printing a student</param>
+    public static void PrintStudent(string quittingString, List<Subject> subjects)
+    {
+        Console.Clear();
+        return;
+    }
+    /// <summary>
+    /// Printing "Ingen match fundet!!" in red foreground, and makes ReadKey()
+    /// </summary>
     public static void NoMatchFound()
     {
         Console.BackgroundColor = ConsoleColor.Red;
@@ -159,6 +200,10 @@ internal static class StaticMethods
         Console.ReadKey();
         Console.Clear();
     }
+    /// <summary>
+    /// Writes a line in green font
+    /// </summary>
+    /// <param name="text">The text that needs to be green</param>
     public static void WriteLineGreen(string text)
     {
         Console.ForegroundColor = ConsoleColor.Green;

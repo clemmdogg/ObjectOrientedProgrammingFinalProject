@@ -82,9 +82,37 @@ List<Subject> subjects = new List<Subject>
         }, StartingDate = new DateTime(2025, 1, 13) },
 };
 
+bool isUserWantingToQuit = false;
+while (!isUserWantingToQuit)
+{
+    // Main menu
+    enmMainMenuChoice mainMenuChoice = StaticMethods.GetMainMenuChoice();
+    // Choices of main menu
+    if (mainMenuChoice == enmMainMenuChoice.SearchForSubject)
+    {
+        StaticMethods.PrintSubject(StaticMethods.GetSubjectChoice(subjects), true);
+    }
+    else if (mainMenuChoice == enmMainMenuChoice.SearchForTeacher)
+    {
+        StaticMethods.PrintTeacher(StaticMethods.GetTeacherChoice(teachers), subjects);
+    }
+    else if (mainMenuChoice == enmMainMenuChoice.SearchForStudent)
+    {
+        StaticMethods.PrintStudent(StaticMethods.GetStudentChoice(students), subjects);
+    }
+    else if (mainMenuChoice == enmMainMenuChoice.QuitProgram)
+    {
+        isUserWantingToQuit = true;
+        Console.WriteLine("Farvel og tak fordi du brugte programmet");
+        Console.ReadKey();
+    }
+    else
+    {
+        StaticMethods.NoMatchFound();
+    }
+}
 
-
-
+/*
 ///
 /// RUNNING PROGRAM WITHOUT STATIC METHODS
 ///
@@ -305,4 +333,4 @@ while (!userWantsToQuit)
         Console.ReadKey();
     }
 }
-
+*/
