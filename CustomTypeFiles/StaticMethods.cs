@@ -176,6 +176,7 @@ internal static class StaticMethods
             if (subject.Students.Contains(student))
             {
                 Console.WriteLine($"\tFag: {subject.Name}");
+                Console.WriteLine($"\tStartdato: {subject.StartingDate.ToString("dd/M/yyyy")}");
                 Console.WriteLine($"\tLærerens navn: {subject.Teacher.FirstName} {subject.Teacher.LastName}");
                 Console.WriteLine();
             }
