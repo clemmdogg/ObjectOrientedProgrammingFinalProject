@@ -47,11 +47,11 @@ List<Teacher> teachers = new List<Teacher>
 // Initilizing all subjects
 List<Subject> subjects = new List<Subject>
 {
-    new Subject{Name = "Grundæggende Programmering 2", Teacher = henrikVincentsPoulsen, Students = new List<Student>(){
+    new Subject{Name = "Databaseprogrammering 3", Teacher = michaelGilbertHansen, Students = new List<Student>(){
         simonHeilbuth, andreasLorentzen, casperClemmensen, danielBjerrreJensen, hjalteMoesgaardLeth, johanMilterJakobsen,
         louisThomasDaoPetersen, lukasHaugstadFrederiksen, marcusSlotRohr, marcusWahlstrom, mathiasAltenburg,
-        patrickGutierrezFogelstrom, sebastianTolbolNielsen, tobiasSvarterHammarkvist, yosefKasas
-        }, StartingDate = new DateTime(2024, 10, 21) },
+        patrickGutierrezFogelstrom, sebastianTolbolNielsen, tobiasSvarterHammarkvist, yosefKasas, metteFrederiksen
+        }, StartingDate = new DateTime(2024, 12, 9) },
     new Subject{Name = "Objectorienteret Programmering 2", Teacher = nielsOlesen, Students = new List<Student>(){
         simonHeilbuth, andreasLorentzen, casperClemmensen, danielBjerrreJensen, hjalteMoesgaardLeth, johanMilterJakobsen,
         louisThomasDaoPetersen, lukasHaugstadFrederiksen, marcusSlotRohr, marcusWahlstrom, mathiasAltenburg,
@@ -62,16 +62,16 @@ List<Subject> subjects = new List<Subject>
         metteFrederiksen, larslokkeRasmussen, troelsLundPoulsen,
         patrickGutierrezFogelstrom, sebastianTolbolNielsen, tobiasSvarterHammarkvist, yosefKasas, ramtinAkbari
         }, StartingDate = new DateTime(2024, 11, 18) },
-    new Subject{Name = "Grundæggende Programmering 2", Teacher = nicolaiBoFredsoe, Students = new List<Student>(){
+    new Subject{Name = "Grundæggende Programmering 2", Teacher = henrikVincentsPoulsen, Students = new List<Student>(){
+        simonHeilbuth, andreasLorentzen, casperClemmensen, danielBjerrreJensen, hjalteMoesgaardLeth, johanMilterJakobsen,
+        louisThomasDaoPetersen, lukasHaugstadFrederiksen, marcusSlotRohr, marcusWahlstrom, mathiasAltenburg,
+        patrickGutierrezFogelstrom, sebastianTolbolNielsen, tobiasSvarterHammarkvist, yosefKasas
+        }, StartingDate = new DateTime(2024, 10, 21) },
+    new Subject{Name = "Server og Sikkerhed 2", Teacher = nicolaiBoFredsoe, Students = new List<Student>(){
         simonHeilbuth, andreasLorentzen, casperClemmensen, danielBjerrreJensen, hjalteMoesgaardLeth, johanMilterJakobsen,
         louisThomasDaoPetersen, lukasHaugstadFrederiksen, marcusSlotRohr, marcusWahlstrom, mathiasAltenburg,
         patrickGutierrezFogelstrom, sebastianTolbolNielsen, tobiasSvarterHammarkvist, yosefKasas, larslokkeRasmussen,
         }, StartingDate = new DateTime(2024, 11, 25) },
-    new Subject{Name = "Databaseprogrammering 3", Teacher = michaelGilbertHansen, Students = new List<Student>(){
-        simonHeilbuth, andreasLorentzen, casperClemmensen, danielBjerrreJensen, hjalteMoesgaardLeth, johanMilterJakobsen,
-        louisThomasDaoPetersen, lukasHaugstadFrederiksen, marcusSlotRohr, marcusWahlstrom, mathiasAltenburg,
-        patrickGutierrezFogelstrom, sebastianTolbolNielsen, tobiasSvarterHammarkvist, yosefKasas, metteFrederiksen
-        }, StartingDate = new DateTime(2024, 12, 9) },
     new Subject{Name = "Databaseserver 2", Teacher = michaelGilbertHansen, Students = new List<Student>(){
         simonHeilbuth, andreasLorentzen, casperClemmensen, danielBjerrreJensen, hjalteMoesgaardLeth, johanMilterJakobsen,
         louisThomasDaoPetersen, lukasHaugstadFrederiksen, marcusSlotRohr, marcusWahlstrom, mathiasAltenburg,

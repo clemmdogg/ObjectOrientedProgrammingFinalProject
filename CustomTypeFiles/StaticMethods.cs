@@ -128,11 +128,13 @@ internal static class StaticMethods
     public static void PrintSubject(Subject subject, bool withTeacherName)
     {
         Console.WriteLine($"\tFag: {subject.Name}");
+        Console.WriteLine($"\tStartdato: {subject.StartingDate.ToString("dd/M/yyyy")}");
         if (withTeacherName)
         {
             Console.WriteLine($"\tLærer: {subject.Teacher.FirstName} {subject.Teacher.LastName}");
         }
         Console.WriteLine($"\tAntal elever ialt: {subject.Students.Count}");
+        subject.Students = subject.Students.OrderBy(student => student.FirstName).ToList();
         foreach (Student student in subject.Students)
         {
             DateCalculator dateCalculator = new DateCalculator(student.Birthday);
@@ -168,6 +170,7 @@ internal static class StaticMethods
     /// <param name="subjects">The subjects you want to search through with student object</param>
     public static void PrintStudent(Student student, List<Subject> subjects)
     {
+        subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
         foreach (Subject subject in subjects)
         {
             if (subject.Students.Contains(student))
