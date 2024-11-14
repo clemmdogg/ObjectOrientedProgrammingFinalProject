@@ -137,8 +137,8 @@ internal static class StaticMethods
         subject.Students = subject.Students.OrderBy(student => student.FirstName).ToList();
         foreach (Student student in subject.Students)
         {
-            DateCalculator dateCalculator = new DateCalculator(student.Birthday);
-            if (dateCalculator.IsDateLessThan20YearsAgo())
+            DateCalculator dateCalculator = new ();
+            if (dateCalculator.IsDateLessThan20YearsAgo(student.Birthday))
             {
                 WriteLineGreen($"\t\t{student.FirstName} {student.LastName}");
             }

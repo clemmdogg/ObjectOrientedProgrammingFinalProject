@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
 
-public struct DateCalculator : IBoolDateCalculations
+public struct DateCalculator
 {
-    public DateTime Date;
-
-    public DateCalculator(DateTime date)
+    public bool IsDateLessThan20YearsAgo(DateTime date)
     {
-        Date = date;
-    }
-    public bool IsDateLessThan20YearsAgo()
-    {
-        IBoolDateCalculations myInterface = this;
-        return myInterface.IIsDateLessThan20YearsAgo(Date);
+        return (date.AddYears(20) >= DateTime.Now); ;
     }
 }
