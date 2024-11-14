@@ -1,11 +1,10 @@
-﻿using ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedProgrammingFinalProject;
+namespace ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
 
 internal static class StaticMethods
 {
@@ -152,10 +151,10 @@ internal static class StaticMethods
     public static void PrintTeacher(Teacher teacher, List<Subject> subjects)
     {
         subjects = subjects.OrderBy(subjects => subjects.StartingDate).ToList();
-        List<Subject> filteredSubject = 
+        List<Subject> filteredSubject =
             subjects.Where(
-                (subject => subject.Teacher.FirstName == teacher.FirstName && 
-                subject.Teacher.LastName == teacher.LastName)
+                subject => subject.Teacher.FirstName == teacher.FirstName &&
+                subject.Teacher.LastName == teacher.LastName
                 ).ToList();
         foreach (Subject subject in filteredSubject)
         {

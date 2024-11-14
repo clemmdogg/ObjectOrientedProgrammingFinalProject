@@ -14,4 +14,9 @@ internal class Student : Person, ITecDepartment
     {
         TecDepartment = tecDeparment;
     }
+    public int GetNumberOfEducations()
+    {
+        ITecDepartment myInterface = this;
+        return myInterface.IGetNumberOfEducations(TecDepartment);
+    }
 }

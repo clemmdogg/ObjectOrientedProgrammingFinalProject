@@ -11,12 +11,13 @@ internal interface ITecDepartment
     public enmTecDepartments TecDepartment { get; set; }
     public void SetDepartment(enmTecDepartments tecDepartment);
 
-    public int GetNumberOfEducations()
+    public int IGetNumberOfEducations(enmTecDepartments TecDepartment)
     {
         if (TecDepartment == enmTecDepartments.Frederiksberg) { return 30; }
-        else if (TecDepartment == enmTecDepartments.Ballerup) { return 12; }
-        else if (TecDepartment == enmTecDepartments.Odense) { return 1; }
+        if (TecDepartment == enmTecDepartments.Ballerup) { return 12; }
+        if (TecDepartment == enmTecDepartments.Odense) { return 1; }
         else { return 0; }
+        
     }
 
 }
