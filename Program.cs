@@ -1,7 +1,6 @@
-﻿global using ObjectOrientedProgrammingFinalProject;
-using ObjectOrientedProgrammingFinalProject.CustomTypeFiles;
-using System.Data;
+﻿using System.Data;
 using static System.Net.Mime.MediaTypeNames;
+
 // Initilizing all students
 Student simonHeilbuth = new ("Simon", "Heilbuth", new DateTime(1985, 4, 16));
 Student andreasLorentzen = new ("Andreas", "Lorentsen", new DateTime(2007, 3, 3));
